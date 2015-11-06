@@ -1,4 +1,4 @@
-spa.shell = (function  ($) {
+spa.shell = (function  () {
 
 	var configMap = {
 		main_html : ['	<div class="spa-shell-head">',
@@ -13,7 +13,7 @@ spa.shell = (function  ($) {
 '	<div class="spa-shell-foot"></div>',
 '	<div class="spa-shell-chat"></div>',
 '	<div class="spa-shell-modal"></div>'].join(""),
-		chat_extend_time: 1000,
+		chat_extend_time: 250,
 		chat_extract_time: 300,
 		chat_extend_height: 450,
 		chat_extract_height: 15 ,
@@ -36,7 +36,11 @@ spa.shell = (function  ($) {
 
 	onClickChat = function  (event) {
 		// body...
-		toggleChat(stateMap.is_chat_retracted);
+		if( toggleChat(stateMap.is_chat_retracted)){
+			$.uriAnchor.setAnchor({
+				chat: (stateMap.is_chat_retracted? 'open': 'closed')
+			});
+		}
 		return false;
 	}
 
@@ -87,4 +91,4 @@ spa.shell = (function  ($) {
 
 	//setTimeout(function(){toggleChat(false);}, 8000);
 	return {initModule: initModule};
-}(jQuery));
+}());
