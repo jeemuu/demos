@@ -16,11 +16,15 @@ spa.shell = (function  ($) {
 		chat_extend_time: 1000,
 		chat_extract_time: 300,
 		chat_extend_height: 450,
-		chat_extract_height: 15 
+		chat_extract_height: 15 ,
+		chat_extend_title: 'click to extract',
+		chat_extract_title: 'click to extend'
 	},
-	stateMap = {$container: null},
+	stateMap = {$container: null,
+		is_chat_retracted: true
+	},
 	jqueryMap ={},
-	setJqueryMap,toggleChat,  initModule;
+	setJqueryMap,toggleChat, onClickChat, initModule;
 
 	setJqueryMap = function(){
 		var $container = stateMap.$container;
@@ -28,6 +32,12 @@ spa.shell = (function  ($) {
 			$container: $container,
 			$chat : $container.find('.spa-shell-chat')
 		};
+	}
+
+	onClickChat = function  (event) {
+		// body...
+		toggleChat(stateMap.is_chat_retracted);
+		return false;
 	}
 
 	toggleChat =function(do_extend, callback){
@@ -44,6 +54,9 @@ spa.shell = (function  ($) {
 				{height: configMap.chat_extend_height},
 				configMap.chat_extend_time,
 				function(){
+					jqueryMap.$chat.attr(
+						'title',configMap.chat_extend_title);
+					stateMap.is_chat_retracted =false;
 					if(callback) callback(jqueryMap.$chat);
 				})
 			return true;
@@ -53,6 +66,9 @@ spa.shell = (function  ($) {
 				{height: configMap.chat_extract_height},
 				configMap.chat_extract_time,
 				function(){
+					jqueryMap.$chat.attr(
+						'title',configMap.chat_extract_title);
+					stateMap.is_chat_retracted =true;
 					if(callback) callback(jqueryMap.$chat);
 				});
 		return true;
@@ -63,10 +79,12 @@ spa.shell = (function  ($) {
 		stateMap.$container = $container;
 		$container.html(configMap.main_html);
 		setJqueryMap();
+		stateMap.is_chat_retracted = true;
+		jqueryMap.$chat.attr('title', configMap.chat_extract_title)
+						.click(onClickChat);
+		//setTimeout(function(){toggleChat(true);}, 3000);
+	};
 
-		setTimeout(function(){toggleChat(true);}, 3000);
-	}
-
-	setTimeout(function(){toggleChat(false);}, 8000);
+	//setTimeout(function(){toggleChat(false);}, 8000);
 	return {initModule: initModule};
 }(jQuery));
