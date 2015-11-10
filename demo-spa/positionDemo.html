@@ -4,9 +4,54 @@
 	<title>脱离文档流与不脱离文档流元素差异</title>
 </head>
 <body>
+
 <div id="1" style="width: 100px; height: 100px; border:1px;background-color: blue;position: absolute;top: 20px;left: 100px;"> </div>
 <div id="2" style="width: 100px; height: 100px; border:1px;background-color: red;left: 10px;"> </div>
 <div id="3" style="width: 100px; height: 100px; border:1px;background-color: yellow;position: relative;left: 30px;"> </div>
 
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div style="width: 100px; height: 100px; border:1px;background-color: yellow;overflow: scroll; position: absolute;top: 300px;left: 100px;">
+<div id='leftAc' style="position: absolute;left: 100px;">left anchor in a div</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div id='frontAc'>front anchor in a div</div>
+<br/>
+
+<br/>
+</div>
+
+
+
+<br/>
+<br/>
+<br/>
+<br/><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<a href="#frontAc">back top</a>
+<a href="#leftAc">back left</a>
 </body>
 </html>
